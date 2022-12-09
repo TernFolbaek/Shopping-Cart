@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ totalItems }) => {
+const Navbar = ({ totalItems , check}) => {
   return (
-    <nav className='nav'>
+    <nav onClick={check} className='nav'>
       <div>
         <Link to='/' className='site-title'>
           Beanie-Nation
@@ -10,7 +10,7 @@ const Navbar = ({ totalItems }) => {
       </div>
       <ul className='links-container'>
         <Link to='/'>Home</Link>
-        <Link to='/shop'>Shop</Link>
+        <Link to='/shop' >Shop</Link>
         <Link to='/checkout' className='cart-icon'>
           <h1>{totalItems}</h1>
           <img src='./images/pet-carrier.png' />
