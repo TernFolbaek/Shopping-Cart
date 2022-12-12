@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import { useState } from 'react';
 import Home from './Home.js';
 import Shop from './Shop.js';
 import Checkout from './Checkout.js';
@@ -6,9 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import SignIn from './SignIn.js';
 import { db } from '../index.js';
-import {
-  getAuth,
-} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import {
   collection,
   addDoc,
@@ -16,7 +14,7 @@ import {
   doc,
   getDocs,
   where,
-  deleteDoc
+  deleteDoc,
 } from 'firebase/firestore';
 import { getUserName } from './SignIn.js';
 
@@ -28,7 +26,6 @@ const App = () => {
     console.log('in check');
     if (!!getAuth().currentUser && cart.length === 0) {
       console.log('in check, user logged in');
-
       const itemsRef = collection(db, `${getUserName()}`);
       const q = query(itemsRef);
 
@@ -62,6 +59,7 @@ const App = () => {
       const colRef = collection(db, `${getUserName()}`);
 
       // Create a query against the collection.
+      console.log(item.src);
       const q = query(colRef, where('src', '==', item.src));
       const querySnapshot = await getDocs(q);
       let removeItems = [];
@@ -76,7 +74,6 @@ const App = () => {
 
       await deleteDoc(doc(db, `${getUserName()}`, removeItems[0].id));
 
-
       const otherItems = cart.filter((value) => value.src !== item.src);
       const existingItems = cart.filter((value) => value.src === item.src);
       existingItems.pop();
@@ -88,7 +85,6 @@ const App = () => {
 
   async function saveItem(item) {
     let userName = getUserName();
-    userName.toString();
 
     try {
       await addDoc(collection(db, `${userName}`), {

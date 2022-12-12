@@ -30,8 +30,9 @@ const conditionalDom = (items, handleCheckout) => {
     });
 
     return uniqueArray.map((item) => {
+      console.log(item);
       return (
-        <div className='flex-column' key={Math.random()} >
+        <div className='flex-column' key={Math.random()}>
           <img className='checkout-images' src={`./images/${item.src}`} />
           <div className='button-group'>
             <button
